@@ -1,0 +1,43 @@
+3.#include <stdio.h>
+int main() {
+    int n, w, lost, i;
+    printf("Enter number of frames: ");
+    scanf("%d", &n);
+    printf("Enter window size: ");
+    scanf("%d", &w);
+    printf("Enter lost frame number (-1 for no loss): ");
+    scanf("%d", &lost);
+    printf("\nFrames sent:\n");
+    for(i = 1; i <= n; i++) {
+        printf("Frame %d sent\n", i);
+        if(i == lost) {
+            printf("Frame %d lost!\n", i);
+            printf("Go-Back-N: Resending from Frame %d\n", i);
+            for(; i <= n; i++)
+                printf("Frame %d resent\n", i);
+            break;
+        }
+        if(i % w == 0)
+            printf("ACK received for window\n");
+    }
+    printf("\nTransmission completed successfully.\n");
+    return 0;
+}
+7.#include <stdio.h>
+#include <string.h>
+int main() {
+    char data[100];
+    char key = 'K';
+    int i;
+    printf("Enter data: ");
+    gets(data);
+    // Encryption
+    for(i = 0; data[i] != '\0'; i++)
+        data[i] = data[i] ^ key;
+    printf("Encrypted data: %s\n", data);
+    // Decryption
+    for(i = 0; data[i] != '\0'; i++)
+        data[i] = data[i] ^ key;
+    printf("Decrypted data: %s\n", data);
+    return 0;
+}
