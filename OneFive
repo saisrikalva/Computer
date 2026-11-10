@@ -1,0 +1,97 @@
+1.#include<stdio.h>
+#include<string.h>
+int main()
+{
+    int choice;
+    int i=0,count=0;
+    char data[100];
+    printf("1.character framing:\n");
+    printf("2.character stuffing:\n");
+    printf("3.bit stuffing:\n");
+    printf("enter your choice:");
+    scanf("%d",&choice);
+    printf("enter your data:");
+    scanf("%s",data);
+    if(choice==1)
+    {
+        printf("framed data:%d%s\n",strlen(data),data);
+    }
+    else if(choice==2)
+    {
+        printf("framed data:$");
+        for(i=0;data[i]!='\0';i++)
+        {
+            if(data[i] == '$')
+            {
+                printf("$");
+            }
+            printf("%c",data[i]);
+        }
+        printf("$\n");
+    }
+    else if(choice==3)
+    {
+        printf("Framed data:01111110");
+        for(i=0;data[i]!='\0';i++)
+        {
+            printf("%c",data[i]);
+            if(data[i] == '1')
+            {
+                count++;
+            }
+            else
+            {
+                count=0;
+            }
+            if(count==5)
+            {
+                printf("0");
+                count=0;
+            }
+        }
+        printf("0111110\n");
+    }
+    else
+    {
+        printf("invalid choice\n");
+    }
+    return 0;
+}
+5.#include<stdio.h>
+int main()
+{
+    int n,graph[10][10];
+    int visited[10]={0};
+    int queue[10],front=0,rear=0;
+    int i,j,source;
+    printf("enter no. of hosts:");
+    scanf("%d",&n);
+    printf("enter connection matrix:\n");
+    for(i=0;i<n;i++)
+    {
+        for (j=0;j<n;j++)
+        {
+            scanf("%d",&graph[i][j]);
+        }
+    }
+    printf("enter source host:");
+    scanf("%d",&source);
+    visited[source]=1;
+    queue[rear++]=source;
+    printf("\nBroadCast Tree:\n");
+    while(front<rear)
+    {
+        int u=queue[front++];
+        for(i=0;i<n;i++)
+        {
+            if(graph[u][i] == 1 && visited[i]==0)
+            {
+                visited[i]=1;
+                queue[rear++]=i;
+
+                printf("Host %d -> Host %d\n",u,i);
+            }
+        }
+    }
+    return 0;
+}
