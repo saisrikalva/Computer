@@ -1,0 +1,48 @@
+8.#include <stdio.h>
+int main() {
+    int bucket, out, n, packet, water = 0;
+    int i;
+    printf("Enter bucket size: ");
+    scanf("%d", &bucket);
+    printf("Enter output rate: ");
+    scanf("%d", &out);
+    printf("Enter number of packets: ");
+    scanf("%d", &n);
+    for(i = 1; i <= n; i++) {
+        printf("Enter packet size %d: ", i);
+        scanf("%d", &packet);
+        if(water + packet > bucket)
+            printf("Packet %d dropped!\n", i);
+        else {
+            water += packet;
+            printf("Packet %d added\n", i);
+        }
+        if(water >= out)
+            water -= out;
+        else
+            water = 0;
+        printf("Remaining: %d\n", water);
+    }
+    return 0;
+}
+9.#include <stdio.h>
+int main() {
+    int n, a[20], i, j, temp;
+    printf("Enter number of frames: ");
+    scanf("%d", &n);
+    printf("Enter frame numbers:\n");
+    for(i = 0; i < n; i++)
+        scanf("%d", &a[i]);
+    // Sorting frames
+    for(i = 0; i < n - 1; i++)
+        for(j = i + 1; j < n; j++)
+            if(a[i] > a[j]) {
+                temp = a[i];
+                a[i] = a[j];
+                a[j] = temp;
+            }
+    printf("\nFrames after sorting:\n");
+    for(i = 0; i < n; i++)
+        printf("Frame %d\n", a[i]);
+    return 0;
+}
